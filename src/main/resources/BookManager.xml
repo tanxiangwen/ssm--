@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dao.mapper.BookManager">
+    <select id="listByPage" resultType="Pojo.Book" >
+        select * from t_book
+    </select>
+
+    <update id="updateBook" parameterType="Pojo.Book">
+        update t_book set `name`=#{name},author=#{author},price=#{price},sales=#{sales},stock=#{stock} where id=#{id}
+    </update>
+    <select id="queryByid" resultType="Pojo.Book">
+        select * from t_book where id=#{id}
+    </select>
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from t_book where id=#{id}
+    </delete>
+    <parameterMap id="books" type="Pojo.Book">
+        <parameter property="id" javaType="integer"></parameter>
+        <parameter property="name" javaType="string"></parameter>
+        <parameter property="price" javaType="string"></parameter>
+        <parameter property="author" javaType="string"></parameter>
+        <parameter property="sales" javaType="string"></parameter>
+        <parameter property="stock" javaType="string"></parameter>
+        <parameter property="img_path" javaType="string"></parameter>
+    </parameterMap>
+    <insert id="addBook" parameterMap="books">
+        insert into t_book values(id=#{id},`name`=#{name},price=#{price},author=#{author},sales=#{sales},stock=#{stock},img_path=#{img_path})
+    </insert>
+</mapper>
